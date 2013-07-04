@@ -1,0 +1,5 @@
+Driver working on external VIA based controllers (vt6306 ar compatibles) 6 reports.
+Ricoh controller on ibm thinkpad: 1 report.
+Traps on TI controllers 1 report on add on card and 1 - notebook
+Trap on SiS controller - 1 report.
+No trap, but no nodes detected - nForce2 - 1 report. 

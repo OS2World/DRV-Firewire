@@ -1,0 +1,80 @@
+Firewire Driver installed!
+  MajorVersion = 0
+  MinorVersion = 1
+  BuildLevel   = 10
+  Date         = 0/0/0
+ 
+1 OHCI compatible controller found!
+ 
+Controller: 0
+   Total Nodes:  2
+   Active Nodes: 2
+   SelfID Count: 2
+   NodeID of Controller: 0xffc1
+   IRM Host ID:          0xffc1
+   Bus Manager Host ID:  0xffff
+   Bus State:
+     Reset:     0
+     Shut Down: 0
+   Controller State:
+     Root:         1
+     Cycle Master: 1
+     IR Master:    1
+     Bus Manager:  0
+   2 nodes attached to this controller
+   Node: 0
+      GUID:      0xa2700218ffdc
+      Vendor ID: 0xa27
+      Node ID:   0xffc0
+      This note is currently: active
+      Bus Options:
+        IRMC:   0
+        CMD:    0
+        ISC:    0
+        BMC:    0
+        PMC:    0
+        Cycle Clock acc:  255
+        MaxRom: 0
+        Generation: 0
+        Link Speed: 2
+        Max Rec:    2048
+      Needs Probe: 0
+      Generation:  4
+      Vendor ID: 0x4
+      Capabilities: 0x83c0
+      Vendor Name from Node: "Apple Computer, Inc."
+      Vendor Name by GUID: "Apple Computer, Inc."
+      Unit Directories: 1
+         Directory: 0
+           Address:   0xfffff0000828
+           Flags:     0xe
+           Vendor ID: 0x0
+           Model ID:  0x0
+           Specifier ID:  0x609e
+           Version:  0x10483
+           ID:       0x0
+           Vendor Name from Unit: ""
+           Model Name from Unit:  "iPod"
+   Node: 1
+      GUID:      0x11066650555f0d
+      Vendor ID: 0x1106
+      Node ID:   0xffc1
+      This note is currently: active
+      Bus Options:
+        IRMC:   1
+        CMD:    1
+        ISC:    1
+        BMC:    0
+        PMC:    0
+        Cycle Clock acc:  100
+        MaxRom: 2
+        Generation: 3
+        Link Speed: 2
+        Max Rec:    2048
+      Needs Probe: 0
+      Generation:  4
+      Vendor ID: 0x4
+      Capabilities: 0x83c0
+      Vendor Name from Node: "OS2 - ohci"
+      Vendor Name by GUID: ""
+      Unit Directories: 0

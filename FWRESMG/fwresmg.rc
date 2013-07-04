@@ -1,0 +1,24 @@
+#include "fwresmg.h"
+#include "os2.h"
+
+BITMAP  ID_SPLASH FWRESMG.BMP
+ICON ID_FrameWindow fwresmg.ico
+
+MENU    ID_MainMenu PRELOAD
+    BEGIN
+    SUBMENU "~File", IDM_File
+        BEGIN
+        SUBMENU "Language", IDM_Language, MIS_TEXT
+            BEGIN
+
+            END
+        MENUITEM "", -1, MIS_SEPARATOR
+        MENUITEM "~Create Report",     IDM_Report, MIS_TEXT
+        MENUITEM "", -1, MIS_SEPARATOR
+        MENUITEM "~Exit",     IDM_Exit, MIS_TEXT
+        END
+    SUBMENU "~Help", IDM_Help
+        BEGIN
+        MENUITEM "~Product Information",    IDM_About, MIS_TEXT
+        END
+    END

@@ -1,0 +1,19 @@
+testtool.exe : oui.obj test.obj .AUTODEPEND
+	@%write testtool.lk1 FIL oui.obj
+	@%write testtool.lk1 FIL test.obj
+	wlink name testtool d all SYS os2v2 op m op maxe=25 op q  @testtool.lk1
+
+oui.obj : oui.c .AUTODEPEND
+	wcc386 oui.c -w4 -e25 -zq -od -d2 -5r -bt=os2 -mf
+
+test.obj : test.cpp .AUTODEPEND
+	wcc386 test.cpp -w4 -e25 -zq -od -d2 -5r -bt=os2 -mf
+
+clean : .SYMBOLIC
+   @if exist *.exe del *.exe
+   @if exist *.map del *.map
+   @if exist *.lk1 del *.lk1
+   @if exist *.obj del *.obj
+   @if exist *.err del *.err
+   @if exist *.res del *.res
+   @if exist *.sym del *.sym

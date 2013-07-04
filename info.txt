@@ -1,0 +1,40 @@
+some architecture notes: (partly taken from linux1394.org)
+Firewire architecture and base classes:
+Protocols - devices on bus handlers, fe sbp2 for firewire hdd's
+Stack - main firewire stack. Handle attach of protocols and hosts
+Host - firewire host. software implementation of card
+Card - physical card handler
+when Stack loaded, it just init himself and wait
+when Protocol loaded, it call FireWireRegisterProtocol
+(hpsb_register_highlevel in linux)
+This call passes a structure containing pointers to four functions
+(*add_host, *remove_host, *host_reset and *iso_receive) provided by the
+registering high-level driver (protocol). These functions are then called when
+the appropriate event occurs in the underlying system, eg. *add_host is
+called every time a new host (a 1394 interface card) is detected and
+initialized, and *iso_receive is called every time isochronous data is
+received from the low-level drivers.
+When FireWireRegisterProtocol is called, *add_host is
+immediately called for every host already known by the ieee1394 stack.
+High-level protocol drivers can also register themselves as responsible for
+handling read/write/lock transactions for areas of the 1394 address space on
+the local hosts. To do so, they must call the function
+FireWireRegisterAddrspace (hpsb_register_addrspace in linux). This call passes
+a structure containing the address range and four pointers (*read, *write,
+*lock and *lock64) provided by the registering high-level driver. These
+functions are then called when the appropriate event occurs in the underlying
+system, eg. *read is called when the system receives a read request for an
+address in the specified range.
+When calling the two mentioned registration functions, it is allowed to let
+some of the pointers be null pointers. If for example only *read was non-null
+in a FireWireRegisterAddrspace call, the address range in question will be
+``read only'' from the 1394 bus. Likewise, letting eg. the *iso_receive
+pointer in a hpsb_register_highlevel call be null will prevent the high-level
+ driver from being called upon reception of isochronous data.
+The 1394 standard uses a 64 bit address space, where the upper 16 bits
+represents the node-ID. High-level drivers register for the lower 48 bits of
+the address space. This means that a high-level driver will be called for
+request for the specified addresses on all the local hosts. The High-level
+driver can differentiate the handling of the hosts if required, as a
+reference to the host in question is passed along with the call.
+Initialization:

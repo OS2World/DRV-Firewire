@@ -1,0 +1,2 @@
+doctor64_rel_0_0_1 : selfId processing done driver loading and operational
+doctor64_rel_0_0_2 : stack working, alpha release

@@ -1,0 +1,111 @@
+This is a detailed guide on how to create useful debug logs for the Firewire driver.
+
+To create log files using the debug version of the Firewire drivers you need the 
+following equipment:
+- two computers
+  - one of them with the Firewire controller installed (called Firewire system from now)
+  - the other one to capture the messages  (called capture system from now)
+- both computers should have at least one COM port each
+- one null modem cable for the COM port
+
+The following software is required:
+- OS/2 debug kernel and loader
+  - a debug kernel and loader can be found on the eCS and Warp 4 CDs
+  - os2image\debug   or   os2image\debug\smp   or   os2image\debug\uni
+  - the file readme.dbg explains how to use the kernels
+- a terminal program
+  - basically any terminal program will work
+  - make sure the terminal program can log sessions to a file
+  - for example: ZOC 
+  - seach for "ZOC" at http://hobbes.nmsu.edu
+
+In addition, you should have knowledge about changing the OS/2 kernel. This 
+document does not describe how to change an OS/2 release kernel against a debug 
+kernel and loader.
+
+The setup:
+==========
+First of all, you should change the Firewire system to use the debug kernel. 
+Do NOT install the Firewire drivers yet! After you have installed the debug kernel, 
+reboot the system to make sure it works normally.
+Now connect the two computers with the null modem cable. If the Firewire system 
+has two COM ports, connect the null modem cable to COM 2. (even if COM 1 is empty!) 
+The COM port on the capture system is not important, just make sure you know what 
+COM port it is.
+The next step is to install your terminal program. After you have it installed, 
+make sure it listens to the COM port with the null modem cable and set it to 
+8,N,1. Make sure the connection speed is set to 9600 baud!
+(For ZOC, simply press the Cancel button when ZOC starts)
+
+Testing the connection:
+=======================
+Make sure the null modem cable is connected and the terminal program is started 
+at the capture system and then reboot the Firewire system. (Make sure the Firewire 
+drivers are NOT installed!) When looking at the terminal program you should see some 
+messages that the debug kernel outputs. They should begin with:
+System Debugger 8/8/97 [686]
+
+If you are not seeing those messages, you need to check your setup! If 
+you see those messages, continue.
+
+Install the Firewire drivers:
+=============================
+Now install the debug Firewire drivers by copying 6 files to your boot drive 
+into the OS2\BOOT directory:
+fired.sys and fired.sym
+firemgr.sys and firemgr.sym
+firehci.sys and firehci.sym
+
+Add the following three lines to config.sys:
+Basedev=fired.sys
+Basedev=firemgr.sys
+Basedev=firehci.sys
+
+Now shutdown the Firewire system.
+
+Capturing the debug messages:
+=============================
+If you are using ZOC, close ZOC now and go to the logs directory of ZOC and 
+delete all logs. Now restart ZOC. This makes sure that you are using a new log 
+file for the Firewire debug messages. If you are using another terminal program, 
+simply make sure you are starting a new log file.
+
+Make sure there is nothing connected to the Firewire controller!
+
+Make sure the terminal program is running and start the Firewire system.
+
+You will see a few messages in the terminal program. Finally a line will appear 
+that starts like this:
+##
+Followed by a blinking cursor. This means that the first Firewire driver has 
+started to load and that it is waiting in a breakpoint. Press "g" followed by 
+enter (in the terminal program!). You have to do this a couple of times until:
+1. The WPS has loaded.
+2. The terminal program shows a TRAP message.
+3. The Firewire system just hangs...
+
+If the WPS has loaded shut down the Firewire system. You will also have to press "g" 
+followed by enter a couple of times until the system has shut down.
+If you are seeing a TRAP in the terminal window or the Firewire system just hangs, power 
+off the Firewire system.
+
+Now close the terminal program and go to the log directory. Take 
+the newly created log file and rename it to:
+<yourName>_ControllerOnly_<date>_<time>.log
+
+If you have a Firewire device you are kindly asked to repeat the steps above 
+with the device attached. Name the new log:
+<yourName>_WithDevice_<date>_<time>.log
+
+Sending the logs:
+=================
+
+Now mail the logs to:
+doctor64@dochome.homedns.org
+
+It would be good if you provide some information in the eMail about what you 
+have tested and with what Firewire devices.
+
+
+Thats it!
+Thanks a lot!

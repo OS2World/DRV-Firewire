@@ -1,0 +1,66 @@
+Debug-Anleitung fr den Firewire-Treiber und die Handhabung der Debug-Logs
+
+Voraussetzungen:
+-2 Rechner mit je mindestens einer seriellen Schnittstelle
+ - einer mit Firewire-Karte 
+ - der andere mit einem Terminalprogramm (hier ZOC)
+-1 Nullmodem-Kabel
+-1 Terminal-Programm
+
+Punkt 1
+Debug-Kernel installieren auf dem Rechner auf welchem der
+Firewire-Hostadapter installiert ist
+auf der ECS CD1 oder auf der Warp4 CD unter os2image\debug\.. 
+dann einfach in die readme.dbg schauen und nach Anweisung vorgehen.
+Nun die Debug-Version des Treibers installieren.
+Die Firewire-Treiber in das Verzeichnis Bootlaufwerk:\os2\boot\ kopieren.
+Das heist alle Dateien also *.sys und *.sym
+Die Firewire-Treiber in die Config.sys eintragen.
+Die Eintr„ge erstmal am Ende der Config vornehmen.
+also:
+Basedev=fired.sys
+Basedev=firemgr.sys
+Basedev=firehci.sys
+
+Punkt2
+Zoc downloden und auf dem Terminal-Rechner installieren
+auf http://hobbes.nmsu.edu/ nach zoc suchen
+
+
+Punkt3
+Firewire-Rechner von Com2 (wenn nicht vorhanden com1) mit dem Terminal-Rechner an Com1 verinden.
+Bei ZOC im Unterverzeichnis log alle Dateien die vorhanden sind l”schen.
+ZOC-Starten und bei Abfrage der Schnittstellen "Abbruch" drcken.
+Ansonsten Com1 auf 8,N,1 setzen und warten.
+Geschwindigkeit muss auf 9600 baud stehen!
+
+Punkt4(Bootlog)
+Firewire-Rechner ohne zus„tzliche FW-Devices nun rebooten, und 
+das Log wird im Terminalfenster von ZOC erscheinen.
+Sobald ein ## mit einem blickendem Cursor erscheint g (fr go) eingeben und dies solange
+wiederholen bis entweder die WPS auf dem Firewire-Rechner erscheint oder aber ein Fehler auftritt.
+Nun erstmal ZOC schliessen und das entstanden LOG-File vom Terminal-Rechner an unten
+angegebene Adresseversenden.
+Versenden sie dieses Log-File unter dem Dateinamen
+<Name>_ControllerOnly_<datum>_<zeit>.log
+haben sie nur einen Controller ohne Device so fahren sie mit Punkt 6 fort
+
+Punkt5(Devicelog)
+L”schen sie das versendete LoG-File aus dem ZOC-Verzeichnis
+Rebooten sie den Firewire-Rechner, diesmal mit angeschlossenem FireWire-Device.
+Alles wie bei Punkt 4 nur diesmal das LOG-File bitte unter dem Namen
+<Name>_WithDevice_<date>_<time>.log
+versenden
+
+Punkt6
+Fr das Herunterfahen des Firewire-Rechners ist zu beachten.
+Erst wieder die Eintr„ge aus der Config.sys austragen, am besten durch REM in der Config.sys
+ZOC auf dem Terminal-Rechner wieder starten.
+Firewire-Rechner herrunterfahren, im Terminal wieder so oft wie n”tig wieder g eingegeben (6x).
+
+
+Adresse an welche die LOG-Files gesendet werden:
+
+doctor64@dochome.homedns.dns
+
+Wir danken fr Ihre Mitarbeit
